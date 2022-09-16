@@ -12,6 +12,8 @@ if (window.location.pathname === '/notes') {
   noteList = document.querySelectorAll('.list-container .list-group');
 }
 
+
+
 // Show an element
 const show = (elem) => {
   elem.style.display = 'inline';
@@ -116,7 +118,7 @@ const handleRenderSaveBtn = () => {
   }
 };
 
-// Render the list of note titles
+//  Render the list of note titles
 const renderNoteList = async (notes) => {
   let jsonNotes = await notes.json();
   if (window.location.pathname === '/notes') {
