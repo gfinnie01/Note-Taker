@@ -1,7 +1,7 @@
 const express = require('express');
 const path = require('path');
 const uuid = require('./helpers/uuid');
-const reviews = require('./db/review');
+const review = require('./db/review');
 
 const PORT = process.env.PORT || 3001;
 
@@ -10,12 +10,12 @@ const app = express();
 
 app.use(express.static('public'));
 
-app.get('/api/review', (req, res) => {
+app.get('/api/notes', (req, res) => {
   res.status(200).json(review);
 });
 
 
-app.post('/api/review', (req, res) => {
+app.post('/api/notes', (req, res) => {
   
   console.info(`${req.method} request received to add a review`);
 
@@ -51,3 +51,5 @@ app.get('/notes', (req, res) =>
 );
 
 app.listen(PORT, () => console.log(`App listening on port http://localhost:${PORT}`));
+
+
