@@ -1,8 +1,8 @@
 const express = require('express');
 const path = require('path');
-const review = review.json;
+
 const PORT = process.env.PORT || 3001;
-const index = index.html;
+
 
 const app = express();
 
