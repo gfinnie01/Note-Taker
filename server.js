@@ -1,7 +1,8 @@
 const express = require('express');
 const path = require('path');
-
+const review = review.json;
 const PORT = process.env.PORT || 3001;
+const index = index.html;
 
 const app = express();
 
@@ -40,7 +41,7 @@ app.post('/api/review', (req, res) => {
 });
 
 app.get('/', (req, res) =>
-  res.sendFile(path.join(__dirname, '/public/index.html'))
+  res.status(200).json(index).sendFile(path.join(__dirname, '/public/index.html'))
 );
 
 app.get('/notes', (req, res) =>
