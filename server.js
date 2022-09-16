@@ -7,26 +7,24 @@ const app = express();
 
 app.use(express.static('public'));
 
-app.get('/api/reviews', (req, res) => {
-  res.status(200).json(reviews);
+app.get('/api/review', (req, res) => {
+  res.status(200).json(review);
 });
 
 
-app.post('/api/reviews', (req, res) => {
+app.post('/api/review', (req, res) => {
   
   console.info(`${req.method} request received to add a review`);
 
   
-  const { product, review, username } = req.body;
+  const { title, text } = req.body;
 
   
-  if (product && review && username) {
+  if (title && text) {
    
     const newReview = {
-      product,
-      review,
-      username,
-      review_id: uuid(),
+     title,
+     text,
     };
 
     const response = {
