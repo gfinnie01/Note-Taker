@@ -7,7 +7,7 @@ const util = require('util')
 
 const PORT = process.env.PORT || 3001;
 
-
+const readFromFile = util.promisify(fs.readFile);
 const app = express();
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
@@ -18,6 +18,22 @@ app.get('/api/notes', (req, res) => {
   res.status(200).json(review);
 });
 
+const writeToFile = (destination, content) =>
+  fs.writeFile(destination, JSON.stringify(content, null, 4), (err) =>
+    err ? console.error(err) : console.info(`\nData written to ${destination}`)
+  );
+
+  const readAndAppend = (content, file) => {
+    fs.readFile(file, 'utf8', (err, data) => {
+      if (err) {
+        console.error(err);
+      } else {
+        const parsedData = JSON.parse(data);
+        parsedData.push(content);
+        writeToFile(file, parsedData);
+      }
+    });
+  };
 
 app.post('/api/notes', (req, res) => {
   
@@ -38,6 +54,7 @@ app.post('/api/notes', (req, res) => {
       body: newReview,
     };
 
+    readAndAppend(newReview, './db/review.json');
     console.log(response);
     res.status(201).json(response);
   } else {
